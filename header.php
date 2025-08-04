@@ -11,7 +11,7 @@
                 <div class="conatainer header-container">
                     <div class="logo">
                         <i class="fas fa-graduation-cap"></i>
-                        <h1>Edutiants AHN</h1>
+                        <h1>AHN CONNECT</h1>
                     </div>
                     <?php include 'navigation.php'; ?>  
                 </div> 

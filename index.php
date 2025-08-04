@@ -145,7 +145,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             <?php endforeach; ?>
             
             <h3 class="sidebar-title">Événements à venir</h3>
-           <!--s <div class="event-card">
+            <div class="event-card">
                 <div class="event-date">15 JAN</div>
                 <div class="event-title">Forum des métiers</div>
                 <div class="event-location"><i class="fas fa-map-marker-alt"></i> Amphithéâtre A</div>
@@ -160,7 +160,6 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                 <div class="event-title">Journée portes ouvertes</div>
                 <div class="event-location"><i class="fas fa-map-marker-alt"></i> Campus principal</div>
             </div>
-            -->
         </div>
     </div>
 <?php else: ?>
@@ -170,8 +169,8 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             <h1>Bienvenue sur le Réseau Social Étudiant</h1>
             <p>Connectez-vous avec vos camarades, partagez vos ressources et restez informé des actualités du département.</p>
             <div class="hero-actions">
-                <a href="inscription.php" class="btn btn-primary">S'inscrire maintenant</a>
-                <a href="connexion.php" class="btn btn-outline">Se connecter</a>
+                <a href="register.php" class="btn btn-primary">S'inscrire maintenant</a>
+                <a href="login.php" class="btn btn-outline">Se connecter</a>
             </div>
         </div>
         
