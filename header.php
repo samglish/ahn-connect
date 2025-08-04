@@ -3,6 +3,15 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Réseau Social Edutiant - Département AHN</title>
+        <style>
+#formulaire input{
+    width: 50%;
+    padding: 10px;  
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}         
+    </style>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
     </head>

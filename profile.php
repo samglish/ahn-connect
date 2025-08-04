@@ -1,5 +1,4 @@
-<? php
-
+<?php
 require_once 'db.sql';
 require_once 'header.php';
 require_once 'functions.php';
@@ -9,7 +8,7 @@ session_start();
     if(!isset($_SESSION['id'])) {
 
         $_SESSION['error'] = "Vous devez etre connecté pur accéder à cette page ";
-        header("Location: connexion.php");
+        header("Location: login.php");
         exit();
     }
 

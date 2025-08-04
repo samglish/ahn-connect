@@ -29,7 +29,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                     <div class="level"><?= $level ?></div>
                 </div>
             </div>
-            
+            fff
             <h3 class="sidebar-title">Navigation</h3>
             <div class="menu">
                 <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>
