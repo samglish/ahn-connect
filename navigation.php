@@ -1,8 +1,8 @@
 <nav class="nav-links">
-    <a href="index.php"><i class="fas fa-home"></i> Accueil</a>
+    <a href="index.php"><i class="fas fa-home"></i>Home</a>
     <a href="#"><i class="fas fa-user-friends"></i> Actualités</a>
     <a href="resultats.php"><i class="fas fa-bell"></i> Résultats</a>
-    <a href="#"><i class="fas fa-newspaper"></i>Chat💬</a>
+    <a href="#"><i class="fas fa-newspaper"></i>💬 Chat</a>
 </nav>
 <div class="user-actions">
     <?php if (isset($_SESSION['id'])): ?>

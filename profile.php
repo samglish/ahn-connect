@@ -7,7 +7,7 @@ session_start();
 
 // Vérification connexion
 if (!isset($_SESSION['id'])) {
-    $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
+    $_SESSION['error'] = "Connectez-vous pour accéder à cette page.";
     header("Location: login.php");
     exit();
 }

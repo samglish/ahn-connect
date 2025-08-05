@@ -6,7 +6,7 @@ session_start();
 // Check if user is logged in 
     if(!isset($_SESSION['id'])) {
 
-        $_SESSION['error'] = "Vous devez etre connecté pur accéder à cette page ";
+        $_SESSION['error'] = "Connectez-vous pour accéder à cette page. ";
         header("Location: login.php");
         exit();
     }
@@ -21,57 +21,39 @@ session_start();
 <hr>
 </br>
     
-        <div class="resultats-list" style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
-            <div class="resultat-block" style="min-width: 260px; background: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 24px; margin-bottom: 16px;">
-                <h3 style="margin-top:0;">IAN</h3>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>
-                        <strong>IC1</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC2</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC3</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC4</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="resultat-block" style="min-width: 260px; background: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 24px; margin-bottom: 16px;">
-                <h3 style="margin-top:0;">IHN</h3>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>
-                        <strong>IC1</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC2</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC3</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                    <li style="margin-top: 12px;">
-                        <strong>IC4</strong><br>
-                        <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-                        <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="resultat-item">
+            
+            <h3> <li>IAN IC1</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            
+            <h3> <li>IAN IC2</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <h3> <li>IAN IC3</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <h3> <li>IAN IC4</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+           
+</br></br>
+            <hr></br>
+
+            <h3> <li>IHN IC1</li></h3
+            <a></a>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <h3> <li>IHN IC2</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <h3> <li>IHN IC3</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <h3> <li>IHN IC4</li></h3>
+            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <hr></br>
         </div>
 </div> 
 <?php require_once 'footer.php'; ?>

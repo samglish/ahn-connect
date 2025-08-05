@@ -162,26 +162,26 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
 </center>
             </div>
         </div>
-        
         <div class="features">
-            <div class="feature-card">
-                <i class="fas fa-users"></i>
-                <h3>Communauté Étudiante</h3>
-                <p>Rejoignez une communauté dynamique d'étudiants et échangez sur vos projets, cours et expériences.</p>
-            </div>
-            
-            <div class="feature-card">
-                
-                <h3>Ressources Partagées</h3>
-                <p>Partagez et accédez à des ressources pédagogiques : notes de cours, exercices, projets, etc.</p>
-            </div>
-            
-            <div class="feature-card">
-                <i class="fas fa-bullhorn"></i>
-                <h3>Actualités en Direct</h3>
-                <p>Soyez informé en temps réel des annonces importantes, événements et résultats du département.</p>
-            </div>
-        </div>
+    <div class="feature-card">
+        <i class="fas fa-users"></i>
+        <h3 style="color: #707070;">Communauté Étudiante</h3>
+        <p style="color: #707070;">Intégrez une communauté active d'étudiants et échangez sur vos projets, vos cours et vos expériences.</p>
+    </div>
+
+    <div class="feature-card">
+        <i class="fas fa-book"></i>
+        <h3 style="color: #707070;">Ressources Partagées</h3>
+        <p style="color: #707070;">Accédez et partagez des ressources pédagogiques variées : cours, exercices, projets, etc.</p>
+    </div>
+
+    <div class="feature-card">
+        <i class="fas fa-bullhorn"></i>
+        <h3 style="color: #707070;">Actualités en Direct</h3>
+        <p style="color: #707070;">Restez informé en temps réel des annonces essentielles, des événements et des résultats du département.</p>
+    </div>
+</div>
+
     </div>
 <?php endif; ?>
 

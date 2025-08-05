@@ -4,17 +4,17 @@
         <div class="container footer-content">
             <div class="footer-section">
                 <h3>À propos</h3>
-                <p>Le réseau social étudiant du Département AHN est une plateforme conçue pour faciliter les échanges entre étudiants, le partage de ressources et la diffusion d'informations académiques.</p>
+            <p>AHN CONNECT est le réseau social étudiant du Département AHN, conçu pour faciliter les échanges entre étudiants, le partage de ressources et la diffusion d'informations académiques.</p>    
             </div>
             
             <div class="footer-section">
                 <h3>Liens rapides</h3>
                 <ul class="footer-links">
-                    <li><a href="index.php"><i class="fas fa-angle-right"></i> Accueil</a></li>
-                    <li><a href="#"><i class="fas fa-angle-right"></i> Communauté</a></li>
-                    <li><a href="#"><i class="fas fa-angle-right"></i> Actualités</a></li>
-                    <li><a href="#"><i class="fas fa-angle-right"></i> Événements</a></li>
-                    <li><a href="#"><i class="fas fa-angle-right"></i> Contact</a></li>
+                      <a href="index.php"><i class="fas fa-home"></i> Accueil</a></br>
+                    <a href="#"><i class="fas fa-user-friends"></i> Actualités</a></br>
+                    <a href="resultats.php"><i class="fas fa-bell"></i> Résultats</a></br>
+                    <a href="#"><i class="fas fa-newspaper"></i> Chat 💬</a>
+                  
                 </ul>
             </div>
             
