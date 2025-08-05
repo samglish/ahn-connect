@@ -1,27 +1,23 @@
 <?php
 require_once 'db.php';
 
-// File upload function
+// Fonction d'upload de fichier
 function upload_file($file) {
     $target_dir = "uploads/";
     $file_type = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
     
-    // Check file type
     $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'zip'];
     if (!in_array($file_type, $allowed_types)) {
-        return ['success' => false, 'error' => 'Type de fichier non autorisé (file type not allowed ). Formats acceptés: jpg, png, gif, pdf, txt, zip'];
+        return ['success' => false, 'error' => 'Type de fichier non autorisé. Formats acceptés: jpg, png, gif, pdf, txt, zip'];
     }
     
-    // Check file size (max 9MB)
     if ($file["size"] > 9000000) {
         return ['success' => false, 'error' => 'Fichier trop volumineux. Taille maximale: 9MB'];
     }
     
-    // Generate unique filename
     $file_name = uniqid() . '.' . $file_type;
     $target_file = $target_dir . $file_name;
     
-    // Upload the file
     if (move_uploaded_file($file["tmp_name"], $target_file)) {
         return ['success' => true, 'file_name' => $file_name];
     } else {
@@ -29,9 +25,9 @@ function upload_file($file) {
     }
 }
 
-// Get all posts with comments
+// Récupérer les posts avec les commentaires
 function get_posts($conn) {
-    $posts_sql = "SELECT posts.*, etudiants.nom, etudiants.prenom, etudiants.profile_pic, 
+    $posts_sql = "SELECT posts.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil, 
                  (SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id) AS comment_count
                  FROM posts
                  JOIN etudiants ON posts.user_id = etudiants.id
@@ -41,7 +37,7 @@ function get_posts($conn) {
     if ($posts_result) {
         while ($row = mysqli_fetch_assoc($posts_result)) {
             $post_id = $row['id'];
-            $comments_sql = "SELECT comments.*, etudiants.nom, etudiants.prenom, etudiants.profile_pic 
+            $comments_sql = "SELECT comments.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil 
                              FROM comments 
                              JOIN etudiants ON comments.user_id = etudiants.id 
                              WHERE post_id = $post_id 
@@ -62,7 +58,7 @@ function get_posts($conn) {
     return $posts;
 }
 
-// Get department news
+// Récupérer les actualités du département
 function get_news($conn) {
     $news_sql = "SELECT * FROM department_news ORDER BY created_at DESC";
     $news_result = mysqli_query($conn, $news_sql);
@@ -75,9 +71,9 @@ function get_news($conn) {
     return $news;
 }
 
-// Get all users
+// Récupérer les utilisateurs
 function get_users($conn) {
-    $users_sql = "SELECT id, nom, prenom, profile_pic, filiere FROM etudiants";
+    $users_sql = "SELECT id, nom, prenom, photo_profil, filiere FROM etudiants";
     $users_result = mysqli_query($conn, $users_sql);
     $users = [];
     if ($users_result) {
@@ -90,7 +86,7 @@ function get_users($conn) {
     return $users;
 }
 
-// Sanitize input
+// Fonction de nettoyage des données
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);

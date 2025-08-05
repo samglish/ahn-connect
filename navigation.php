@@ -2,7 +2,7 @@
     <a href="index.php"><i class="fas fa-home"></i> Accueil</a>
     <a href="#"><i class="fas fa-user-friends"></i> Actualités</a>
     <a href="resultats.php"><i class="fas fa-bell"></i> Résultats</a>
-    <a href="#"><i class="fas fa-newspaper"></i>Discussions</a>
+    <a href="#"><i class="fas fa-newspaper"></i>Chat💬</a>
 </nav>
 <div class="user-actions">
     <?php if (isset($_SESSION['id'])): ?>
@@ -12,7 +12,7 @@
         ?>
         <img src="uploads/<?= $profile_pic ?>" alt="Profile" class="profile-pic">
         <span><?= $username ?></span>
-     <a href="logout.php" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i>Logout⏻</a>
+     <a href="logout.php" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i>⏻</a>
     <?php else: ?>
         <a href="login.php" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
        <a href="register.php" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</a>

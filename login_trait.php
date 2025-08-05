@@ -15,7 +15,6 @@ $mot_de_passe = $_POST['mot_de_passe'];
 
 $sql = "SELECT id, prenom, nom, filiere, photo_profil, mot_de_passe FROM etudiants WHERE email = ?";
 $stmt = $conn->prepare($sql);
-
 if (!$stmt) {
     die("Erreur préparation requête: " . $conn->error);
 }

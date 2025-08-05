@@ -34,6 +34,10 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             <h3 class="sidebar-title">Navigation</h3>
             <div class="menu">
                 <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>
+                <a href="#" class="menu-item"><i class="fas fa-cog"></i> Paramètres</a>
+                <a href="#" class="menu-item"><i class="fas fa-bookmark"></i> Favoris</a>
+                <a href="#" class="menu-item"><i class="fas fa-users"></i> Groupes</a>
+                <a href="#" class="menu-item"><i class="fas fa-calendar-check"></i> Événements</a>
                 <a href="#" class="menu-item"><i class="fas fa-question-circle"></i> Aide</a>
             </div>
         </div>
@@ -66,7 +70,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             <?php foreach ($posts as $post): ?>
                 <div class="post-card">
                     <div class="post-header">
-                      <img src="uploads/<?= $profile_pic ?>" alt="Profile">
+                        <img src="uploads/<?= $post['profile_pic'] ?>" alt="Profile">
                         <div class="post-user">
                             <div class="username"><?= $post['username'] ?></div>
                             <div class="post-time"><?= date('d/m/Y H:i', strtotime($post['created_at'])) ?></div>
@@ -109,7 +113,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                         
                         <?php foreach ($post['comments'] as $comment): ?>
                             <div class="comment">
-                                <img src="uploads/<?= $profile_pic ?>" alt="Profile">
+                                <img src="uploads/<?= $comment['profile_pic'] ?>" alt="Profile">
                                 <div class="comment-content">
                                     <div class="username"><?= $comment['username'] ?></div>
                                     <div class="text"><?= $comment['content'] ?></div>

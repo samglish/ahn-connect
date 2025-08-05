@@ -22,7 +22,7 @@
                         <i class="fas fa-graduation-cap"></i>
                         <h1>AHN CONNECT</h1>
                     </div>
-                    <?php include 'navigation.php'; ?>  
+                 <?php include 'navigation.php'; ?>  
                 </div> 
            </header>
 
