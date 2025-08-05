@@ -24,7 +24,29 @@ if ($stmt->num_rows > 0) {
 
     // Vérification du mot de passe
     if (password_verify($mot_de_passe, $mot_de_passe_hash)) {
-        echo "Connexion réussie ! Bienvenue.";
+        // Mot de passe correct, démarrer la session
+        session_start();
+
+        // Récupérer les autres infos de l'utilisateur
+        $sql_info = "SELECT id, prenom, nom, profile_pic FROM etudiants WHERE email = ?";
+        $stmt_info = $conn->prepare($sql_info);
+        $stmt_info->bind_param("s", $email);
+        $stmt_info->execute();
+        $stmt_info->bind_result($id, $prenom, $nom, $profile_pic);
+        $stmt_info->fetch();
+
+        $_SESSION['id'] = $id;
+        $_SESSION['prenom'] = $prenom;
+        $_SESSION['nom'] = $nom;
+        $_SESSION['profile_pic'] = $profile_pic;
+
+        $stmt_info->close();
+
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Mot de passe incorrect.";
+    }
     } else {
         echo "Mot de passe incorrect.";
     }

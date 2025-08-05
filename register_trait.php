@@ -22,6 +22,7 @@ $sql = "INSERT INTO etudiants (nom, prenom, matricule, numero, filiere, email, m
 
 if ($conn->query($sql) === TRUE) {
     echo "Inscription réussie !";
+    header("location: login.php");
 } else {
     echo "Erreur : " . $conn->error;
 }

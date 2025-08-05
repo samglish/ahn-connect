@@ -3,12 +3,12 @@
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
-?>
+?>        
  <center>
     <br>
 <h2>Inscription</h2>
  <div id="formulaire">
-    <form action="register.php" method="post">
+    <form action="register_trait.php" method="post">
         <input type="text" name="nom" placeholder="Nom" required></br> 
         <input type="text" name="prenom" placeholder="Prénom" required></br>
         <input type="text" name="matricule" placeholder="Matricule" required></br>
