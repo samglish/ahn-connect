@@ -23,31 +23,22 @@ if ($stmt->num_rows > 0) {
     $stmt->fetch();
 
     // Vérification du mot de passe
-    if (password_verify($mot_de_passe, $mot_de_passe_hash)) {
-        // Mot de passe correct, démarrer la session
-        session_start();
+       if (password_verify($mot_de_passe, $mot_de_passe_hash)) {
+    // Récupérer les infos de l'utilisateur
+    $sql = "SELECT id, prenom, nom, profile_pic, filiere FROM etudiants WHERE email = ?";
+    $stmt_infos = $conn->prepare($sql);
+    $stmt_infos->bind_param("s", $email);
+    $stmt_infos->execute();
+    $stmt_infos->bind_result($id, $prenom, $nom, $profile_pic, $filiere);
+    $stmt_infos->fetch();
 
-        // Récupérer les autres infos de l'utilisateur
-        $sql_info = "SELECT id, prenom, nom, profile_pic FROM etudiants WHERE email = ?";
-        $stmt_info = $conn->prepare($sql_info);
-        $stmt_info->bind_param("s", $email);
-        $stmt_info->execute();
-        $stmt_info->bind_result($id, $prenom, $nom, $profile_pic);
-        $stmt_info->fetch();
+    session_start();
+    $_SESSION['id'] = $id;
 
-        $_SESSION['id'] = $id;
-        $_SESSION['prenom'] = $prenom;
-        $_SESSION['nom'] = $nom;
-        $_SESSION['profile_pic'] = $profile_pic;
-
-        $stmt_info->close();
-
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "Mot de passe incorrect.";
-    }
-    } else {
+    $stmt_infos->close();
+    header("location: index.php");
+    exit();
+}else {
         echo "Mot de passe incorrect.";
     }
 } else {
