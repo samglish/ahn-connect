@@ -1,54 +1,59 @@
 <?php
-require_once 'db.sql';
+require_once 'db.php'; // Corrigé : c'est db.php, pas db.sql
 require_once 'header.php';
 require_once 'functions.php';
 
 session_start();
-// Check if user is logged in 
-    if(!isset($_SESSION['id'])) {
 
-        $_SESSION['error'] = "Vous devez etre connecté pur accéder à cette page ";
-        header("Location: login.php");
-        exit();
-    }
+// Vérification connexion
+if (!isset($_SESSION['id'])) {
+    $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
+    header("Location: login.php");
+    exit();
+}
 
-// Get user profile data @wirngo-bot
-    $user_id = $_GET['id'] ?? $_SESSION['id'];
-    $sql = "SELECT * FROM etudiants WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $user_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_rresult($stmt);
-    $user = mysqli_fetch_assoc($result);
+// Récupérer l'id de l'utilisateur à afficher (GET ou session)
+$user_id = $_GET['id'] ?? $_SESSION['id'];
 
-//Get user's posts
-    $posts_sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC";
-    $stmt = mysqli-prepare($conn, $posts_sql);
-    mysqli_stmt_bind_param($stmt, "i", $user_id);
-    mysqli_stmt_execute($stmt);
-    $posts_result = mysqli_stmt_get_result($stmt);
-    $posts = [];
-    while ($row = mysqli_fetch_assoc($posts_result)) {
-        $posts[]= $row;
-    }
+// Préparation et exécution requête pour récupérer les infos utilisateur
+$sql = "SELECT * FROM etudiants WHERE id = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "i", $user_id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$user = mysqli_fetch_assoc($result);
 
+if (!$user) {
+    echo "Utilisateur non trouvé.";
+    exit();
+}
 
-//Combine prenom and nom for display ( afficher)
-    $full_name = $user['prenom']. ' ' . $user['nom'];
+// Récupérer les posts de l'utilisateur
+$posts_sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = mysqli_prepare($conn, $posts_sql);
+mysqli_stmt_bind_param($stmt, "i", $user_id);
+mysqli_stmt_execute($stmt);
+$posts_result = mysqli_stmt_get_result($stmt);
 
-    ?>
+$posts = [];
+while ($row = mysqli_fetch_assoc($posts_result)) {
+    $posts[] = $row;
+}
+
+$full_name = htmlspecialchars($user['prenom'] . ' ' . $user['nom']);
+?>
 
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-avatar">
-            <img src="uploads/<?= $user['profile_pic'] ?>" alt="Photo de Profile">
+            <img src="uploads/<?= htmlspecialchars($user['photo_profil'] ?? 'default.jpg') ?>" alt="Photo de profil">
         </div>
         <div class="profile-info">
             <h1><?= $full_name ?></h1>
-            <p class="profile-level"><?= $user['filiere'] ?></p>
-            <p class="profile-bio"><?= $user['bio'] ?? 'Pas de bio pour le moment.' ?></p>
+            <p class="profile-level"><?= htmlspecialchars($user['filiere'] ?? 'Étudiant') ?></p>
+            <p class="profile-bio"><?= htmlspecialchars($user['bio'] ?? 'Pas de bio pour le moment.') ?></p>
 
-            <?php if ($user_id == $SESSION['id']): ?>
+            <?php if ($user_id == $_SESSION['id']): ?>
                 <a href="edit_profile.php" class="btn btn-primary">Modifier le profil</a>
             <?php endif; ?>
         </div>
@@ -57,21 +62,21 @@ session_start();
     <div class="profile-content">
         <h2>Publications</h2>
 
-        <?php if (count($posts)>0): ?>
+        <?php if (count($posts) > 0): ?>
             <?php foreach ($posts as $post): ?>
                 <div class="profile-post">
-                    <div class="post-date"><?= date('d/m/Y: i', strtotime($post['created_at'])) ?><div>
-                    <p><?= $post['content'] ?></p>
-                    <?php if (£post['file_path']): ?>
+                    <div class="post-date"><?= date('d/m/Y H:i', strtotime($post['created_at'])) ?></div>
+                    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                    <?php if (!empty($post['file_path'])): ?>
                         <div class="post-file">
                             <?php
-                                $ext = pathinfo($post['file_path'], PATHINFO_EXTENSION);
-                                $image_exts = ['jpg', 'jpeg', 'png'];
+                                $ext = strtolower(pathinfo($post['file_path'], PATHINFO_EXTENSION));
+                                $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
                             ?>
-                            <?php if (in_array(strtolow($ext), $image_exts)): ?>
-                                <img src="uploads/<?= $post['file_path'] ?>" class="file-download">
+                            <?php if (in_array($ext, $image_exts)): ?>
+                                <img src="uploads/<?= htmlspecialchars($post['file_path']) ?>" alt="Image du post" class="file-download">
                             <?php else: ?>
-                                <a href="uploads/<?= $post['file_path'] ?>" clas="file-download">
+                                <a href="uploads/<?= htmlspecialchars($post['file_path']) ?>" class="file-download" download>
                                     <i class="fas fa-file-download"></i> Télécharger le fichier
                                 </a>
                             <?php endif; ?>

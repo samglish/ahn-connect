@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
@@ -29,7 +30,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                     <div class="level"><?= $level ?></div>
                 </div>
             </div>
-            fff
+           
             <h3 class="sidebar-title">Navigation</h3>
             <div class="menu">
                 <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>

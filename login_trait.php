@@ -1,51 +1,48 @@
 <?php
-// Connexion à la base de données
-$conn = new mysqli("localhost", "root", "", "gestion_etudiants");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Vérifier la connexion
+session_start();
+
+$conn = new mysqli("localhost", "root", "", "gestion_etudiants");
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
-// Récupération des données du formulaire
 $email = $_POST['email'];
 $mot_de_passe = $_POST['mot_de_passe'];
 
-// Requête pour chercher l'utilisateur
-$sql = "SELECT mot_de_passe FROM etudiants WHERE email = ?";
+$sql = "SELECT id, prenom, nom, filiere, photo_profil, mot_de_passe FROM etudiants WHERE email = ?";
 $stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    die("Erreur préparation requête: " . $conn->error);
+}
+
 $stmt->bind_param("s", $email);
 $stmt->execute();
-$stmt->store_result();
+$result = $stmt->get_result();
 
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($mot_de_passe_hash);
-    $stmt->fetch();
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
 
-    // Vérification du mot de passe
-       if (password_verify($mot_de_passe, $mot_de_passe_hash)) {
-    // Récupérer les infos de l'utilisateur
-    $sql = "SELECT id, prenom, nom, profile_pic, filiere FROM etudiants WHERE email = ?";
-    $stmt_infos = $conn->prepare($sql);
-    $stmt_infos->bind_param("s", $email);
-    $stmt_infos->execute();
-    $stmt_infos->bind_result($id, $prenom, $nom, $profile_pic, $filiere);
-    $stmt_infos->fetch();
+    if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['prenom'] = $user['prenom'];
+        $_SESSION['nom'] = $user['nom'];
+        $_SESSION['filiere'] = $user['filiere'];
+        $_SESSION['profile_pic'] = $user['photo_profil'];
 
-    session_start();
-    $_SESSION['id'] = $id;
-
-    $stmt_infos->close();
-    header("location: index.php");
-    exit();
-}else {
-        echo "Mot de passe incorrect.";
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "<script>alert('Mot de passe incorrect.'); window.location.href='login.php';</script>";
     }
 } else {
-    echo "Adresse email non reconnue.";
+    echo "<script>alert('Adresse email non reconnue.'); window.location.href='login.php';</script>";
 }
 
 $stmt->close();
 $conn->close();
 ?>
-
