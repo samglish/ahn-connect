@@ -51,15 +51,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                 <button type="submit" name="create_post" class="btn btn-primary">Publier</button>
             </form>
             
-            <!-- Department News -->
-            <h3 class="section-title">Actualités du Département</h3>
-            <?php foreach ($news as $item): ?>
-                <div class="news-card">
-                    <div class="news-title"><?= $item['title'] ?></div>
-                    <div class="news-date">Publié le <?= date('d/m/Y H:i', strtotime($item['created_at'])) ?></div>
-                    <div class="news-content"><?= $item['content'] ?></div>
-                </div>
-            <?php endforeach; ?>
+            
             
             <!-- User Posts -->
             <h3 class="section-title">Publications récentes</h3>
@@ -130,17 +122,15 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
         
         <!-- Right Sidebar -->
         <div class="right-sidebar">
-            <h3 class="sidebar-title">Communauté</h3>
-            <?php foreach ($users as $user): ?>
-                <a href="profile.php?id=<?= $user['id'] ?>" class="user-card">
-                    <img src="uploads/<?= $user['profile_pic'] ?>" alt="Profile">
-                    <div class="user-info">
-                        <div class="username"><?= $user['username'] ?></div>
-                        <div class="level"><?= $user['level'] ?></div>
-                    </div>
-                </a>
+            <!-- Department News -->
+            <h3 class="section-title">Actualités du Département</h3>
+            <?php foreach ($news as $item): ?>
+                <div class="news-card">
+                    <div class="news-title"><?= $item['title'] ?></div>
+                    <div class="news-date">Publié le <?= date('d/m/Y H:i', strtotime($item['created_at'])) ?></div>
+                    <div class="news-content"><?= $item['content'] ?></div>
+                </div>
             <?php endforeach; ?>
-            
             <h3 class="sidebar-title">Événements à venir</h3>
             <div class="event-card">
                 <div class="event-date">15 JAN</div>
@@ -160,14 +150,16 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
         </div>
     </div>
 <?php else: ?>
+    
     <!-- Landing Page for Non-Logged-in Users -->
     <div class="hero">
         <div class="hero-banner">
-            <h1>Bienvenue sur le Réseau Social Étudiant</h1>
-            <p>Connectez-vous avec vos camarades, partagez vos ressources et restez informé des actualités du département.</p>
-            <div class="hero-actions">
-                <a href="register.php" class="btn btn-primary">S'inscrire maintenant</a>
+            <h1>Bienvenue sur AHN CONNECT</h1>
+<p>Connectez-vous pour rejoindre vos camarades, partager vos ressources et rester informés des actualités de votre département.</p>
+ <div class="hero-actions">
+    <center>
                 <a href="login.php" class="btn btn-outline">Se connecter</a>
+</center>
             </div>
         </div>
         
@@ -179,7 +171,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             </div>
             
             <div class="feature-card">
-                <i class="fas fa-book"></i>
+                
                 <h3>Ressources Partagées</h3>
                 <p>Partagez et accédez à des ressources pédagogiques : notes de cours, exercices, projets, etc.</p>
             </div>
