@@ -11,8 +11,8 @@ function upload_file($file) {
         return ['success' => false, 'error' => 'Type de fichier non autorisé. Formats acceptés: jpg, png, gif, pdf, txt, zip'];
     }
     
-    if ($file["size"] > 9000000) {
-        return ['success' => false, 'error' => 'Fichier trop volumineux. Taille maximale: 9MB'];
+    if ($file["size"] > 50000000) {
+        return ['success' => false, 'error' => 'Fichier trop volumineux. Taille maximale: 50MB'];
     }
     
     $file_name = uniqid() . '.' . $file_type;
@@ -27,16 +27,23 @@ function upload_file($file) {
 
 // Récupérer les posts avec les commentaires
 function get_posts($conn) {
+    $current_user_id = $_SESSION['id'];
     $posts_sql = "SELECT posts.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil, 
-                 (SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id) AS comment_count
+                 (SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id) AS comment_count,
+                 (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id) AS like_count,
+                 (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id AND likes.user_id = $current_user_id) AS user_has_liked
                  FROM posts
                  JOIN etudiants ON posts.user_id = etudiants.id
                  ORDER BY posts.created_at DESC";
+
     $posts_result = mysqli_query($conn, $posts_sql);
     $posts = [];
+
     if ($posts_result) {
         while ($row = mysqli_fetch_assoc($posts_result)) {
             $post_id = $row['id'];
+
+            // Récupérer les commentaires du post
             $comments_sql = "SELECT comments.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil 
                              FROM comments 
                              JOIN etudiants ON comments.user_id = etudiants.id 
@@ -50,11 +57,14 @@ function get_posts($conn) {
                     $comments[] = $comment_row;
                 }
             }
+
             $row['comments'] = $comments;
             $row['username'] = $row['prenom'] . ' ' . $row['nom'];
+            $row['user_has_liked'] = $row['user_has_liked'] > 0 ? true : false;
             $posts[] = $row;
         }
     }
+
     return $posts;
 }
 
@@ -93,4 +103,7 @@ function sanitize_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
+// Fonction like
+
 ?>

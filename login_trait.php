@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $email = $_POST['email'];
 $mot_de_passe = $_POST['mot_de_passe'];
 
-$sql = "SELECT id, prenom, nom, filiere, photo_profil, mot_de_passe FROM etudiants WHERE email = ?";
+$sql = "SELECT id, prenom, nom, filiere, bio,photo_profil, mot_de_passe FROM etudiants WHERE email = ?";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     die("Erreur préparation requête: " . $conn->error);
@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['filiere'] = $user['filiere'];
         $_SESSION['profile_pic'] = $user['photo_profil'];
-
+        $_SESSION['bio'] = $user['bio'];
         header("Location: index.php");
         exit();
     } else {

@@ -25,3 +25,4 @@ document.querySelectorAll('.post-action').forEach(action =>{
         });
     }
 });
+
