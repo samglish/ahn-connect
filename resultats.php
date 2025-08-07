@@ -16,7 +16,7 @@ session_start();
 <div class="sidebar">
             
 <br>
-    <div id="resultats" align="left">
+    <div id="resultats">
 <span>
    <h2>Résultats des examens 2024-2025</h2>
     <p>Consultez les résultats des examens pour l'année académique 2024-2025.</p>
