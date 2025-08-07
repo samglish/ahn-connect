@@ -96,9 +96,6 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
         <i class="far fa-share-square"></i> Partager
     </div>
 </div>
-
-
-
                     <div class="post-comments">
                         <h4 class="comments-title">Commentaires (<?= $post['comment_count'] ?>)</h4>
 
@@ -125,7 +122,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
 
         <!-- Right Sidebar -->
         <div class="right-sidebar">
-            <h3 class="section-title">Actualités du Département</h3>
+            <h3 class="section-title">Actualités</h3>
             <?php foreach ($news as $item): ?>
                 <div class="news-card">
                     <div class="news-title"><?= $item['title'] ?></div>
@@ -136,6 +133,38 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
         </div>
 
     </div>
+<?php else: ?>
+    <!-- Landing Page for Non-Logged-in Users -->
+    <div class="hero">
+        <div class="hero-banner">
+            <h1>Bienvenue sur AHN CONNECT</h1>
+            <p>Connectez-vous pour rejoindre vos camarades, partager vos ressources et rester informés des actualités de votre département.</p>
+            <div class="hero-actions">
+                <center>
+                    <a href="login.php" class="btn btn-outline">Se connecter</a>
+                </center>
+            </div>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3 style="color: #707070;">Communauté Étudiante</h3>
+                <p style="color: #707070;">Intégrez une communauté active d'étudiants et échangez sur vos projets, vos cours et vos expériences.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-book"></i>
+                <h3 style="color: #707070;">Ressources Partagées</h3>
+                <p style="color: #707070;">Accédez et partagez des ressources pédagogiques variées : cours, exercices, projets, etc.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bullhorn"></i>
+                <h3 style="color: #707070;">Actualités en Direct</h3>
+                <p style="color: #707070;">Restez informé en temps réel des annonces essentielles, des événements et des résultats du département.</p>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.news-feed').addEventListener('click', function(e) {
@@ -172,37 +201,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-<?php else: ?>
-    <!-- Landing Page for Non-Logged-in Users -->
-    <div class="hero">
-        <div class="hero-banner">
-            <h1>Bienvenue sur AHN CONNECT</h1>
-            <p>Connectez-vous pour rejoindre vos camarades, partager vos ressources et rester informés des actualités de votre département.</p>
-            <div class="hero-actions">
-                <center>
-                    <a href="login.php" class="btn btn-outline">Se connecter</a>
-                </center>
-            </div>
-        </div>
-        <div class="features">
-            <div class="feature-card">
-                <i class="fas fa-users"></i>
-                <h3 style="color: #707070;">Communauté Étudiante</h3>
-                <p style="color: #707070;">Intégrez une communauté active d'étudiants et échangez sur vos projets, vos cours et vos expériences.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-book"></i>
-                <h3 style="color: #707070;">Ressources Partagées</h3>
-                <p style="color: #707070;">Accédez et partagez des ressources pédagogiques variées : cours, exercices, projets, etc.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-bullhorn"></i>
-                <h3 style="color: #707070;">Actualités en Direct</h3>
-                <p style="color: #707070;">Restez informé en temps réel des annonces essentielles, des événements et des résultats du département.</p>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
 
 <?php require_once 'footer.php'; ?>

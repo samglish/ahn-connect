@@ -12,15 +12,17 @@ session_start();
     }
 
 ?>  
-    <br>
-    <div id="resultats">
+
+<div class="sidebar">
+            
+<br>
+    <div id="resultats" align="left">
 <span>
    <h2>Résultats des examens 2024-2025</h2>
     <p>Consultez les résultats des examens pour l'année académique 2024-2025.</p>
 </span>
 <hr>
 </br>
-    
         <div class="resultat-item">
             
             <h3> <li>IAN IC1</li></h3>
@@ -56,5 +58,12 @@ session_start();
             <hr></br>
         </div>
 </div> 
+        </div>
+
+
+
+
+
+    
 <?php require_once 'footer.php'; ?>
 
