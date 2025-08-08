@@ -4,6 +4,11 @@ require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
 
+if (!isset($_SESSION['id'])) {
+    header("Location: accueil.php");
+    exit();
+}
+
 // Fetch data for the page
 $news = get_news($conn);
 $posts = get_posts($conn);

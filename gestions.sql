@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 07 août 2025 à 23:43
+-- Généré le : ven. 08 août 2025 à 10:43
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `gestion_etudiants`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'departement ahn', '1234'),
+(2, 'admin', '1234'),
+(3, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -45,7 +66,9 @@ INSERT INTO `chat` (`id`, `user_id`, `nom`, `prenom`, `photo`, `message`, `creat
 (23, 15, 'MEWO', 'INES', '1754600666_Beidi.png', 'bonjour ici', '2025-08-07 17:34:43'),
 (24, 13, 'BEIDI', 'SAMUEL', '1754436857_sammmmm.png', 'bonjour', '2025-08-07 17:35:09'),
 (25, 13, 'BEIDI', 'SAMUEL', '1754436857_sammmmm.png', 'hi', '2025-08-07 17:38:00'),
-(26, 13, 'BEIDI', 'SAMUEL', '1754436857_sammmmm.png', 'bhn', '2025-08-07 17:38:33');
+(26, 13, 'BEIDI', 'SAMUEL', '1754436857_sammmmm.png', 'bhn', '2025-08-07 17:38:33'),
+(27, 13, 'BEIDI', 'SAMUEL', '1754436857_sammmmm.png', 'je suis la', '2025-08-07 17:53:27'),
+(28, 15, 'MEWO', 'INES', '1754600666_Beidi.png', 'ok chef j\'arrive', '2025-08-07 17:53:48');
 
 -- --------------------------------------------------------
 
@@ -92,7 +115,12 @@ CREATE TABLE `department_news` (
 INSERT INTO `department_news` (`id`, `title`, `content`, `created_at`) VALUES
 (1, 'Résultats SN', 'RAS\r\n', '0000-00-00 00:00:00'),
 (2, 'Journée portes ouvertes', 'RAS', '0000-00-00 00:00:00'),
-(3, 'Conférence sur l\'IA', 'RAS toujour(sorry)', '0000-00-00 00:00:00');
+(3, 'Conférence sur l\'IA', 'RAS toujour(sorry)', '0000-00-00 00:00:00'),
+(4, 'hmm', 'ok', '2025-08-08 08:06:30'),
+(5, 'hmm', 'ok', '2025-08-08 08:07:29'),
+(6, 'Sam', 'o', '2025-08-08 08:09:08'),
+(7, 'Rentree scolaire 2024-2025', 'sdasafm sosv ssfjsffssjfjsfsf fwfsfsfskffsf fsfsfsprwrf sfofwfwmfmf fspkfsfsffsm gsofsjfsofsfs fsofskfsfs fsfsmfsfs sksgsksfmafmamfa fajfaiffmfsfs sosjfanfafafofsmfldF ODJS', '2025-08-08 08:10:14'),
+(8, 'Parrainage', 'ok ok recu', '2025-08-08 08:30:35');
 
 -- --------------------------------------------------------
 
@@ -143,9 +171,15 @@ INSERT INTO `likes` (`id`, `user_id`, `post_id`, `created_at`) VALUES
 (81, 14, 5, '2025-08-06 01:57:58'),
 (87, 14, 3, '2025-08-06 01:58:08'),
 (90, 14, 1, '2025-08-06 01:58:19'),
-(237, 13, 1, '2025-08-07 16:06:26'),
-(240, 13, 6, '2025-08-07 21:38:12'),
-(241, 13, 5, '2025-08-07 21:38:14');
+(244, 13, 6, '2025-08-07 21:52:43'),
+(245, 13, 5, '2025-08-07 21:52:49'),
+(246, 13, 4, '2025-08-07 21:52:53'),
+(247, 13, 3, '2025-08-07 21:52:56'),
+(248, 13, 2, '2025-08-07 21:52:59'),
+(249, 13, 1, '2025-08-07 21:53:04'),
+(250, 15, 6, '2025-08-07 21:53:58'),
+(253, 15, 4, '2025-08-07 21:54:05'),
+(255, 15, 5, '2025-08-08 03:29:42');
 
 -- --------------------------------------------------------
 
@@ -223,6 +257,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `chat`
 --
 ALTER TABLE `chat`
@@ -286,10 +326,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `comments`
@@ -301,7 +347,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT pour la table `department_news`
 --
 ALTER TABLE `department_news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `etudiants`
@@ -313,7 +359,7 @@ ALTER TABLE `etudiants`
 -- AUTO_INCREMENT pour la table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT pour la table `news`

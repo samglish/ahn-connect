@@ -13,8 +13,6 @@ session_start();
 
 ?>  
 
-<div class="sidebar">
-            
 <br>
     <div id="resultats">
 <span>
@@ -26,39 +24,31 @@ session_start();
         <div class="resultat-item">
             
             <h3> <li>IAN IC1</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-            
+            <a href="results/SN IAN1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IAN1.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
             <h3> <li>IAN IC2</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SN IAN2.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IAN2.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
             <h3> <li>IAN IC3</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-            <h3> <li>IAN IC4</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-           
+            <a href="results/SN IAN3.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IAN3.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
 </br></br>
             <hr></br>
 
             <h3> <li>IHN IC1</li></h3
             <a></a>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SN IHN1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IHN1.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
             <h3> <li>IHN IC2</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+             <a href="results/SN IHN2.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IHN2.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
             <h3> <li>IHN IC3</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
-            <h3> <li>IHN IC4</li></h3>
-            <a href="uploads/resultats_ihn_ic1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="uploads/resultats_rattrapage.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+             <a href="results/SN IHN3.pdf" class="btn btn-primary" target="_blank">Session normale</a>
+            <a href="results/SR IHN3.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+        
             <hr></br>
         </div>
 </div> 
-        </div>
 
 
 

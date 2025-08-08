@@ -11,9 +11,9 @@
                 <h3>Liens rapides</h3>
                 <ul class="footer-links">
                       <a href="index.php"><i class="fas fa-home"></i> Accueil</a></br>
-                    <a href="#"><i class="fas fa-user-friends"></i> Actualités</a></br>
+                    <a href="news.php"><i class="fas fa-user-friends"></i> Actualités</a></br>
                     <a href="resultats.php"><i class="fas fa-bell"></i> Résultats</a></br>
-                    <a href="#"><i class="fas fa-newspaper"></i> Chat 💬</a>
+                    <a href="chat.php"><i class="fas fa-newspaper"></i> Chat 💬</a>
                   
                 </ul>
             </div>
@@ -21,13 +21,13 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Département AHN, ENSPM</p>
-                <p><i class="fas fa-envelope"></i> contact@gmail.com</p>
-                <p><i class="fas fa-phone"></i> +2376******</p>
+                <p><i class="fas fa-envelope"></i> ahnenspm@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +237620601651</p>
             </div>
         </div>
         
         <div class="container copyright">
-            <p>&copy; 2025 Réseau Social Étudiant - Département AHN. Tous droits réservés.</p>
+            <p>&copy; 2025 AHN Connect - Département AHN. Tous droits réservés.</p>
         </div>
     </footer>
     

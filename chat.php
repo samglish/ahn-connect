@@ -6,7 +6,7 @@ require_once 'functions.php';
 
 if (!isset($_SESSION['id'])) {
     $_SESSION['error'] = "Connectez-vous pour accéder à cette page.";
-    header("Location: connexion.php");
+    header("Location: login.php");
     exit();
 }
 

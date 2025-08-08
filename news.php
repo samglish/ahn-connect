@@ -4,6 +4,12 @@ session_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
+if (!isset($_SESSION['id'])) {
+    $_SESSION['error'] = "Connectez-vous pour accéder à cette page.";
+    header("Location: login.php");
+    exit();
+}
+
 $news = get_news($conn);
 
 ?>
