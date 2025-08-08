@@ -9,8 +9,9 @@ $news = get_news($conn);
 ?>
  <center>
  <div class="sidebar">
+    <h6><a href="login_admin.php" class="btn btn-primary">Nouvelle Annonce</a> </br></br></h6>
     <div id="resultats">
-            <h3 class="section-title">Actualités</h3>
+            <h3 class="section-title">Actualités </h3>  
             <?php foreach ($news as $item): ?>
                 <div class="news-card">
                     <div class="news-title"><?= $item['title'] ?></div>
