@@ -1,21 +1,30 @@
-# 🎓 AHN CONNECT
+# AHN Connect 🚀
 
-AHN CONNECT est une application web académique qui permet aux étudiants de rester connectés, de partager des actualités, de suivre leurs amis, de consulter les résultats et de recevoir des notifications en temps réel.
-
----
-
-## 📌 Fonctionnalités principales
-
-- **Authentification sécurisée** (connexion/déconnexion avec sessions PHP)
-- **Profil utilisateur** avec photo, nom et menu déroulant
-- **Fil d’actualité** pour publier et consulter des posts
-- **Gestion des amis** et suivi des publications
-- **Notifications en temps réel** (likes, commentaires, actualités)
-- **Affichage des résultats académiques**
-- **Interface responsive** adaptée aux mobiles et ordinateurs
+[![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4?logo=php&logoColor=white)]()
+[![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-4479A1?logo=mysql&logoColor=white)]()
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)]()
+[![AJAX](https://img.shields.io/badge/AJAX-Dynamic-blue)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 ---
 
+## 📌 Aperçu du projet
+
+**AHN Connect** est une plateforme sociale académique permettant aux étudiants de communiquer, partager et collaborer en temps réel.  
+Elle intègre un fil d’actualités, un système de likes et de commentaires, des notifications instantanées et une gestion des amis.
+
+---
+
+## 🎯 Fonctionnalités
+
+- 🔐 **Authentification** : Inscription, connexion, déconnexion, sessions sécurisées
+- 👤 **Profil utilisateur** : Nom, prénom, photo de profil, infos personnelles
+- 📰 **Fil d’actualités** : Publications texte/images, likes, commentaires, mise à jour dynamique via AJAX
+- 🤝 **Amis** : Ajout, suppression, liste avec photo et infos
+- 🔔 **Notifications en temps réel** : Likes, commentaires, invitations
+- 📢 **Actualités départementales** : Annonces officielles
+
+---
 ## 🖼️ Aperçu de l'application
 
 ### **Fil d’actualité**
