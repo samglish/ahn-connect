@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+ob_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
@@ -29,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Veuillez remplir tous les champs.";
     }
 }
+ob_end_flush();
 ?>
 
 <div class="container" style="max-width: 600px; margin: auto; margin-top: 30px;">

@@ -1,21 +1,17 @@
 <?php
-// Affiche les erreurs PHP pour faciliter le débogage
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+session_start();
 
-// Connexion à la base de données
 $conn = new mysqli("localhost", "root", "", "gestion_etudiants");
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
-// Vérifie que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // Préparation de la requête
     $sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -26,9 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Vérification du résultat
-    if ($result->num_rows > 0) {
-        session_start();
+    if ($result && $result->num_rows > 0) {
         $_SESSION['admin'] = $username;
         header("Location: actu.php");
         exit();
@@ -37,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $stmt->close();
-    $conn->close();
 }
+$conn->close();
 ?>
+

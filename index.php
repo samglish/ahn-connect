@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
@@ -17,6 +18,7 @@ $user_id = $_SESSION['id'] ?? null;
 $username = ($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? '');
 $profile_pic = $_SESSION['profile_pic'] ?? 'default.jpg';
 $level = $_SESSION['filiere'] ?? 'Étudiant';
+ob_end_flush();
 ?>
 
 <?php if (isset($_SESSION['id'])): ?>
