@@ -10,8 +10,7 @@
 
 ## 📌 Aperçu du projet
 
-**AHN Connect** est une plateforme sociale académique permettant aux étudiants de communiquer, partager et collaborer en temps réel.  
-Elle intègre un fil d’actualités, un système de likes et de commentaires, des notifications instantanées et une gestion des amis.
+**AHN Connect** est une plateforme sociale académique permettant aux étudiants de communiquer, partager et collaborer en temps réel. Elle intègre un fil d’actualités, un système de likes et de commentaires, des notifications instantanées et une gestion des amis.
 
 ---
 
