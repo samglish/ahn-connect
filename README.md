@@ -75,7 +75,14 @@ AHN-Connect/
 ├── resultats.php        # Consultation des résultats
 ├── notifications.php    # Gestion et affichage des notifications
 ├── assets/              # CSS, JS et images
-└── uploads/             # Photos de profil et images postées
+|── uploads/             # Photos de profil et images postées
+├── assets/             # CSS, JS, images
+├── uploads/            # Fichiers et photos uploadés
+├── functions.php       # Fonctions globales
+├── login.php           # Connexion utilisateur
+├── register.php        # Inscription
+├── notifications.php   # Gestion des notifications
+└── ...
 ```
 ## 📦 Installation
 
@@ -96,18 +103,4 @@ AHN-Connect/
 * Ouvrir dans le navigateur :
 ```php
 http://localhost/ahn-connect/
-```
-6. Structure
-```
-ahn-connect/
-│
-├── assets/             # CSS, JS, images
-├── uploads/            # Fichiers et photos uploadés
-├── db.php              # Connexion base de données
-├── functions.php       # Fonctions globales
-├── index.php           # Fil d’actualités
-├── login.php           # Connexion utilisateur
-├── register.php        # Inscription
-├── notifications.php   # Gestion des notifications
-└── ...
 ```
