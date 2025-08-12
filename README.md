@@ -75,7 +75,7 @@ AHN-Connect/
 ├── resultats.php        # Consultation des résultats
 ├── notifications.php    # Gestion et affichage des notifications
 ├── assets/              # CSS, JS et images
-|── uploads/             # Photos de profil et images postées
+├── uploads/             # Photos de profil et images postées
 ├── assets/             # CSS, JS, images
 ├── uploads/            # Fichiers et photos uploadés
 ├── functions.php       # Fonctions globales
