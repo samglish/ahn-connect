@@ -19,7 +19,14 @@ AHN CONNECT est une application web académique qui permet aux étudiants de res
 ## 🖼️ Aperçu de l'application
 
 ### **Fil d’actualité**
-![Fil d’actualité](tof1.png)
+![Fil d’actualité](tof6.png)
+
+![Menu navigation](tof1.png)
+
+![Menu navigation](tof7.png)
+
+### **Menu de chat**
+![Menu navigation](tof4.png)
 
 ### **Menu des actus**
 ![Menu navigation](tof2.png)
@@ -27,22 +34,10 @@ AHN CONNECT est une application web académique qui permet aux étudiants de res
 ### **Menu des amis**
 ![Menu navigation](tof3.png)
 
-### **Menu de chat**
-![Menu navigation](tof4.png)
+### **Menu de profil**
+![Menu navigation](tof5.png)
 
-### **Fil d’actualité**
-![Fil d’actualité](tof5.png)
-
-### **Menu des actus**
-![Menu navigation](tof6.png)
-
-### **Menu des amis**
-![Menu navigation](tof7.png)
-
-### **Menu de chat**
-![Menu navigation](tof8.png)
-
-### **Menu de chat**
+### **Menu de Edit profil**
 ![Menu navigation](tof9.png)
 
 ---
