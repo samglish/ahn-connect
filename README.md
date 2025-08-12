@@ -30,6 +30,21 @@ AHN CONNECT est une application web académique qui permet aux étudiants de res
 ### **Menu de chat**
 ![Menu navigation](tof4.png)
 
+### **Fil d’actualité**
+![Fil d’actualité](tof5.png)
+
+### **Menu des actus**
+![Menu navigation](tof6.png)
+
+### **Menu des amis**
+![Menu navigation](tof7.png)
+
+### **Menu de chat**
+![Menu navigation](tof8.png)
+
+### **Menu de chat**
+![Menu navigation](tof9.png)
+
 ---
 
 ## 🛠️ Technologies utilisées
@@ -57,3 +72,4 @@ AHN-Connect/
 ├── notifications.php    # Gestion et affichage des notifications
 ├── assets/              # CSS, JS et images
 └── uploads/             # Photos de profil et images postées
+```
