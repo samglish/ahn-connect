@@ -77,3 +77,37 @@ AHN-Connect/
 ├── assets/              # CSS, JS et images
 └── uploads/             # Photos de profil et images postées
 ```
+## 📦 Installation
+
+1. **Cloner le projet**
+   ```bash
+   git clone https://github.com/votre-utilisateur/ahn-connect.git
+   ```
+2. Placer le dossier dans le serveur
+* Déposer dans htdocs (XAMPP) ou équivalent.
+3. Créer la base de données
+* Importer database.sql dans phpMyAdmin
+4. Configurer la connexion
+* Dans db.php, modifier si besoin :
+```php
+  $conn = new mysqli("localhost", "root", "", "gestion_etudiants");
+```
+5. Lancer le projet
+* Ouvrir dans le navigateur :
+```php
+http://localhost/ahn-connect/
+```
+6. Structure
+```
+ahn-connect/
+│
+├── assets/             # CSS, JS, images
+├── uploads/            # Fichiers et photos uploadés
+├── db.php              # Connexion base de données
+├── functions.php       # Fonctions globales
+├── index.php           # Fil d’actualités
+├── login.php           # Connexion utilisateur
+├── register.php        # Inscription
+├── notifications.php   # Gestion des notifications
+└── ...
+```
