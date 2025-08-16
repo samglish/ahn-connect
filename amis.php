@@ -120,19 +120,21 @@ if ($result->num_rows == 0) {
     while ($row = $result->fetch_assoc()) {
         $photo = !empty($row['photo_profil']) ? $row['photo_profil'] : 'default.jpg';
         echo "
-        <div class='friend-card'>
-          <a href='uploads/{$photo}'> <img src='uploads/{$photo}' alt='Photo profil' class='friend-photo'></a>
-            <div class='friend-info'>
-                <h5>{$row['prenom']} {$row['nom']}</h5>
-                <p class='text-muted'>Matricule: {$row['matricule']}</p>
-            </div>
-            <div class='friend-actions'>
-                <form method='POST' style='display:inline'>
-                    <input type='hidden' name='friend_id' value='{$row['id']}'>
-                    <button type='submit' name='remove_friend' class='btn btn-sm btn-outline-danger'>Supprimer</button>
-                </form>
-            </div>
-        </div>";
+<div class='friend-card'>
+    <a href='profile.php?id={$row['id']}'>
+        <img src='uploads/{$photo}' alt='Photo profil' class='friend-photo'>
+    </a>
+    <div class='friend-info'>
+        <h5><a href='profile.php?id={$row['id']}'>{$row['prenom']} {$row['nom']}</a></h5>
+        <p class='text-muted'>Matricule: {$row['matricule']}</p>
+    </div>
+    <div class='friend-actions'>
+        <form method='POST' style='display:inline'>
+            <input type='hidden' name='friend_id' value='{$row['id']}'>
+            <button type='submit' name='remove_friend' class='btn btn-sm btn-outline-danger'>Supprimer</button>
+        </form>
+    </div>
+</div>";
     }
     echo "</div>";
 }
