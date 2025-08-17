@@ -140,7 +140,7 @@ $result = $conn->query($sql);
             <div class="message <?= $is_me ? 'me' : 'other' ?>">
                 <div class="message-content">
                     <?php if (!$is_me): ?>
-                         <img src="uploads/<?= htmlspecialchars($row['photo']) ?>" alt="Photo">
+                         <a href="uploads/<?= htmlspecialchars($row['photo']) ?>"><img src="uploads/<?= htmlspecialchars($row['photo']) ?>" alt="Photo"></a>
                     <?php endif; ?>
 
                     <div class="message-bubble">
