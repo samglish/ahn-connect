@@ -15,7 +15,10 @@ $news = get_news($conn);
 ?>
  <center>
  <div class="sidebar">
-    <h6><a href="login_admin.php" class="btn btn-primary">Nouvelle Annonce</a> </br></br></h6>
+ <h5><a href="amis.php" class="btn btn-primary">Amis</a> </br></br></h5>
+
+    <h5><a href="login_admin.php" class="btn btn-primary">Nouvelle Annonce</a> </br></br></h5>
+      
     <div id="resultats">
             <h3 class="section-title">Actualités </h3>  
             <?php foreach ($news as $item): ?>
