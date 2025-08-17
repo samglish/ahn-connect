@@ -150,7 +150,7 @@ $result = $conn->query($sql);
                     </div>
 
                     <?php if ($is_me): ?>
-                         <img src="uploads/<?= $profile_pic ?>" alt="Profile">
+                         <a href="uploads/<?= $profile_pic ?>"><img src="uploads/<?= $profile_pic ?>" alt="Profile"></a>
                     <?php endif; ?>
                 </div>
             </div>
