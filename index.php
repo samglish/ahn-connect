@@ -1,6 +1,5 @@
 <?php
 session_start();
-ob_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
@@ -18,7 +17,6 @@ $user_id = $_SESSION['id'] ?? null;
 $username = ($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? '');
 $profile_pic = $_SESSION['profile_pic'] ?? 'default.jpg';
 $level = $_SESSION['filiere'] ?? 'Étudiant';
-ob_end_flush();
 ?>
 
 <?php if (isset($_SESSION['id'])): ?>
@@ -36,7 +34,9 @@ ob_end_flush();
             <h3 class="sidebar-title">Navigation</h3>
             <div class="menu">
                 <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>
+                <a href="amis.php" class="menu-item"><i class="fas fa-user-friends"></i> Mes Amis</a>
                 <a href="#" class="menu-item"><i class="fas fa-question-circle"></i> Aide</a>
+                
             </div>
         </div>
 
@@ -58,7 +58,7 @@ ob_end_flush();
             <?php foreach ($posts as $post): ?>
                 <div class="post-card">
                     <div class="post-header">
-                        <img src="uploads/<?= $post['photo_profil'] ?>" alt="Profile">
+                        <a href="uploads/<?= $post['photo_profil'] ?>"><img src="uploads/<?= $post['photo_profil'] ?>" alt="Profile"></a>
                         <div class="post-user">
                             <div class="username"><?= $post['username'] ?></div>
                             <div class="post-time"><?= date('d/m/Y H:i', strtotime($post['created_at'])) ?></div>
@@ -74,7 +74,7 @@ ob_end_flush();
                                     $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
                                 ?>
                                 <?php if (in_array(strtolower($ext), $image_exts)): ?>
-                                    <img src="uploads/<?= $post['file_path'] ?>" alt="Post Image">
+                                   <a href="uploads/<?= $post['file_path'] ?>"><img src="uploads/<?= $post['file_path'] ?>" alt="Post Image"></a>
                                 <?php else: ?>
                                     <a href="uploads/<?= $post['file_path'] ?>" class="file-download">
                                         <i class="fas fa-file-download"></i> Télécharger <?= strtoupper($ext) ?> (<?= $post['file_path'] ?>)
@@ -94,21 +94,30 @@ ob_end_flush();
 <div class="post-actions">
     <div class="post-action like-button" data-post-id="<?= $post['id'] ?>">
         <i class="<?= $post['user_has_liked'] ? 'fas' : 'far' ?> fa-thumbs-up"></i> 
-        J'aime (<span class="like-count"><?= $post['like_count'] ?></span>)
+       (<span class="like-count"><?= $post['like_count'] ?></span>)
     </div>
     <div class="post-action">
-        <i class="far fa-comment"></i> Commenter
+        <i class="far fa-comment"></i> Comment
     </div>
-    <div class="post-action">
-        <i class="far fa-share-square"></i> Partager
-    </div>
+<?php
+  $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+  $share_url = $scheme . "://" . $_SERVER['HTTP_HOST'] . "/post.php?id=" . $post['id'];
+?>
+<div class="post-action share-button"
+     data-post-id="<?= $post['id'] ?>"
+     data-post-url="<?= htmlspecialchars($share_url, ENT_QUOTES) ?>">
+  <i class="far fa-share-square"></i> Share
+</div>
+
+
+
 </div>
                     <div class="post-comments">
                         <h4 class="comments-title">Commentaires (<?= $post['comment_count'] ?>)</h4>
 
                         <?php foreach ($post['comments'] as $comment): ?>
                             <div class="comment">
-                                <img src="uploads/<?= $comment['photo_profil'] ?>" alt="Profile">
+                               <a href="uploads/<?= $comment['photo_profil'] ?>"> <img src="uploads/<?= $comment['photo_profil'] ?>" alt="Profile"></a>
                                 <div class="comment-content">
                                     <div class="username"><?= $comment['username'] ?></div>
                                     <div class="text"><?= $comment['content'] ?></div>
@@ -173,40 +182,99 @@ ob_end_flush();
 <?php endif; ?>
 
 <script>
+function copyToClipboardRobust(text) {
+  // 1) Si Clipboard API dispo ET contexte sécurisé (HTTPS / localhost)
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  // 2) Fallback compatible HTTP: execCommand('copy')
+  return new Promise(function(resolve, reject) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) resolve();
+      else reject(new Error('execCommand copy failed'));
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.news-feed').addEventListener('click', function(e) {
-        if (e.target.closest('.like-button')) {
-            const likeBtn = e.target.closest('.like-button');
-            const postId = likeBtn.dataset.postId;
+  const feed = document.querySelector('.news-feed');
+  if (!feed) return;
 
-            fetch('like_post.php', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'post_id=' + postId
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const likeCountSpan = likeBtn.querySelector('.like-count');
-                    likeCountSpan.textContent = data.like_count;
+  feed.addEventListener('click', function(e) {
+    // --- LIKE ---
+    const likeWrap = e.target.closest('.like-button');
+    if (likeWrap) {
+      e.preventDefault();
+      const postId = likeWrap.dataset.postId;
+      fetch('like_post.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'post_id=' + encodeURIComponent(postId)
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          const likeCountSpan = likeWrap.querySelector('.like-count');
+          if (likeCountSpan) likeCountSpan.textContent = data.like_count;
 
-                    const icon = likeBtn.querySelector('i');
-                    if (data.user_has_liked) {
-                        likeBtn.classList.add('liked');
-                        icon.classList.remove('far');
-                        icon.classList.add('fas');
-                    } else {
-                        likeBtn.classList.remove('liked');
-                        icon.classList.remove('fas');
-                        icon.classList.add('far');
-                    }
-                } else {
-                    alert(data.message);
-                }
-            });
+          const icon = likeWrap.querySelector('i');
+          if (data.user_has_liked) {
+            likeWrap.classList.add('liked');
+            if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+          } else {
+            likeWrap.classList.remove('liked');
+            if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+          }
+        } else {
+          alert(data.message || 'Une erreur est survenue.');
         }
-    });
+      })
+      .catch(() => alert('Erreur réseau.'));
+      return;
+    }
+
+    // --- SHARE ---
+    const shareBtn = e.target.closest('.share-button');
+    if (shareBtn) {
+      e.preventDefault();
+      const url = shareBtn.dataset.postUrl || window.location.href;
+
+      // 1) Web Share API (mobile/HTTPS)
+      if (navigator.share) {
+        navigator.share({
+          title: "Publication AHN Connect",
+          text: "Découvre ce post sur AHN Connect",
+          url: url
+        })
+        .catch(() => {/* ignore cancel */});
+        return;
+      }
+
+      // 2) Copie dans le presse-papier (HTTPS)
+      copyToClipboardRobust(url)
+        .then(() => alert("Lien copié dans le presse-papiers ✅\n" + url))
+        .catch(() => {
+          // 3) Prompt manuel (fonctionne partout)
+          const manual = prompt("Copiez ce lien :", url);
+          // même si l'utilisateur annule, on ne casse pas l’UX
+        });
+    }
+  });
 });
 </script>
+
 
 <?php require_once 'footer.php'; ?>
