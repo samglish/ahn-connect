@@ -136,9 +136,9 @@
     <!-- Liens de navigation -->
     <nav class="nav-links" id="navMenu">
         <a href="index.php"><i class="fas fa-home"></i>Accueil</a>
-        <a href="news.php"><i class="fas fa-user-friends"></i>Actus</a>
-        <a href="resultats.php"><i class="fas fa-bell"></i>Notes</a>
-        <a href="chat.php"><i class="fas fa-comments"></i>Chat</a>
+        <a href="news.php"><i class="fas fa-user-friends"></i>Amis/Actus</a>
+        <a href="resultats.php"><i class="fas fa-bell"></i>Résultats</a>
+        <a href="chat.php"><i class="fas fa-comments"></i>Discussions</a>
     </nav>
 
     <!-- Actions utilisateur -->
