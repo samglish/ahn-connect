@@ -35,6 +35,7 @@ $result = $conn->query($sql);
 
 <style>
     .chat-container {
+        width: 100%;
         max-width: 800px;
         margin: 0 auto;
         padding: 10px;
@@ -98,15 +99,23 @@ $result = $conn->query($sql);
         margin-top: 5px;
     }
 
+    /* 📱 Optimisation mobile */
     @media (max-width: 600px) {
+        .chat-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 5px;
+        }
+
         .chat-box {
-            height: 300px;
+            height: 70vh; /* occupe 70% de la hauteur écran */
             padding: 8px;
         }
 
         .message-content {
             flex-direction: column;
             align-items: flex-start;
+            max-width: 100%;
         }
 
         .me .message-content {
