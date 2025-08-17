@@ -35,7 +35,7 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
             <div class="menu">
                 <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>
                 <a href="amis.php" class="menu-item"><i class="fas fa-user-friends"></i> Mes Amis</a>
-                <a href="chat.php" class="menu-item"><i class="fas fa-comments"></i> Chat</a>
+                <a href="chat.php" class="menu-item"><i class="fas fa-comments"></i> Discussions</a>
 
                 
             </div>
