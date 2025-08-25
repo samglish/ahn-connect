@@ -1,9 +1,9 @@
 <?php
+session_start();
 require_once 'db.php'; // Corrigé : c'est db.php, pas db.sql
 require_once 'header.php';
 require_once 'functions.php';
 
-session_start();
 
 // Vérification connexion
 if (!isset($_SESSION['id'])) {
@@ -46,7 +46,7 @@ $full_name = htmlspecialchars($user['prenom'] . ' ' . $user['nom']);
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-avatar">
-            <img src="uploads/<?= htmlspecialchars($user['photo_profil'] ?? 'default.jpg') ?>" alt="Photo de profil">
+          <a href="uploads/<?= htmlspecialchars($user['photo_profil'] ?? 'default.jpg') ?>">  <img src="uploads/<?= htmlspecialchars($user['photo_profil'] ?? 'default.jpg') ?>" alt="Photo de profil"></a>
         </div>
         <div class="profile-info">
             <h1><?= $full_name ?></h1>
@@ -74,7 +74,7 @@ $full_name = htmlspecialchars($user['prenom'] . ' ' . $user['nom']);
                                 $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
                             ?>
                             <?php if (in_array($ext, $image_exts)): ?>
-                                <img src="uploads/<?= htmlspecialchars($post['file_path']) ?>" alt="Image du post" class="file-download">
+                               <a href="uploads/<?= htmlspecialchars($post['file_path']) ?>"> <img src="uploads/<?= htmlspecialchars($post['file_path']) ?>" alt="Image du post" class="file-download"></a>
                             <?php else: ?>
                                 <a href="uploads/<?= htmlspecialchars($post['file_path']) ?>" class="file-download" download>
                                     <i class="fas fa-file-download"></i> Télécharger le fichier

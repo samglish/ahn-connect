@@ -1,9 +1,9 @@
 <?php
 // configuration d base de donnee
 $host = 'localhost';      // Server name
-$dbname = 'gestion_etudiants';  //database name
-$username = 'root';       
-$password = '';           
+$dbname = 'ahnens9421_enspm';  //database name
+$username = 'ahnens9421_sam';       
+$password = 'Samglish12';           
 
 // Create connection
 try {
@@ -64,6 +64,7 @@ try {
     }
     
     // Insert sample news if not exists
+
     $news_check = "SELECT COUNT(*) AS count FROM department_news";
     $result = mysqli_query($conn, $news_check);
     $row = mysqli_fetch_assoc($result);
@@ -71,11 +72,7 @@ try {
     if ($row['count'] == 0) {
         $news_queries = [
             "INSERT INTO department_news (title, content) VALUES 
-                ('Résultats SN', 'Les résultats de la session de septembre sont disponibles sur le portail étudiant.')",
-            "INSERT INTO department_news (title, content) VALUES 
-                ('Journée portes ouvertes', 'Le département AHN organise une journée portes ouvertes le 30 janvier.')",
-            "INSERT INTO department_news (title, content) VALUES 
-                ('Conférence sur l''IA', 'Une conférence sur les dernières avancées en intelligence artificielle aura lieu le 22 janvier.')"
+                ('Résultats ', 'Les résultats de la session normale et rattrapage sont disponibles sur la page résultats.')"
         ];
         
         foreach ($news_queries as $query) {

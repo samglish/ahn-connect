@@ -4,8 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-
-$conn = new mysqli("localhost", "root", "", "gestion_etudiants");
+$conn = new mysqli("localhost", "ahnens9421_sam", "Samglish12", "ahnens9421_enspm");
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }

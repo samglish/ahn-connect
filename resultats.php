@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once 'db.php';
 require_once 'header.php';
 require_once 'functions.php';
-session_start();
 // Check if user is logged in 
     if(!isset($_SESSION['id'])) {
 
@@ -16,8 +16,8 @@ session_start();
 <br>
     <div id="resultats">
 <span>
-   <h2>Résultats des examens 2024-2025</h2>
-    <p>Consultez les résultats des examens pour l'année académique 2024-2025.</p>
+   <h2 align="center">Résultats 2024-2025</h2>
+    <p align="center">Consultez les résultats des examens pour l'année académique 2024-2025.</p>
 </span>
 <hr>
 </br>
@@ -25,26 +25,26 @@ session_start();
             
             <h3> <li>IAN IC1</li></h3>
             <a href="results/SN IAN1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IAN1.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IAN1.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
             <h3> <li>IAN IC2</li></h3>
             <a href="results/SN IAN2.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IAN2.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IAN2.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
             <h3> <li>IAN IC3</li></h3>
             <a href="results/SN IAN3.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IAN3.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IAN3.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
 </br></br>
             <hr></br>
 
             <h3> <li>IHN IC1</li></h3
             <a></a>
             <a href="results/SN IHN1.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IHN1.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IHN1.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
             <h3> <li>IHN IC2</li></h3>
              <a href="results/SN IHN2.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IHN2.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IHN2.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
             <h3> <li>IHN IC3</li></h3>
              <a href="results/SN IHN3.pdf" class="btn btn-primary" target="_blank">Session normale</a>
-            <a href="results/SR IHN3.pdf" class="btn btn-primary" target="_blank">Session de rattrapage</a>
+            <a href="results/SR IHN3.pdf" class="btn btn-primary" target="_blank">Rattrapage</a>
         
             <hr></br>
         </div>

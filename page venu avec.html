@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: #edd8d8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            background: #f1e8e8;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 770px;
+            text-align: center;
+            margin: auto;
+            border: 3px solid #660000;
+        }
+
+        .container img {
+            max-width: 75%; /* Optimized for mobile */
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(1.2rem, 2vw, 2rem); /* Responsive size */
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2a2525;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+
+        a {
+            color: #8A0000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover, a:focus {
+            color: #660000;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: auto;
+            width: 100%;
+            background: #660000;
+            padding: 20px 0;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #FFCC00;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #FFE066;
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 0;
+            color: #FFFFFF !important;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="https://cm-s3.camoo.hosting/492220c341f7489996eb01871a2e8aca:static/images/39744fa9-a509-40f2-894b-25010a050b37.webp" alt="Welcome message for users on Camoo Hosting" loading="lazy">
+    <h1>Bienvenue sur <strong id="domainName" style="color: #8A0000; text-decoration: underline;"></strong></h1>
+    <p>
+        Vous voyez cette page parce que vous n’avez pas encore placé votre contenu sur le serveur.
+        Pour commencer, téléversez votre site web dans le répertoire <strong>public_html</strong>.
+    </p>
+    <p>
+        Pour plus d'informations, veuillez consulter notre <a href="https://community.camoo.hosting/hc/fr/articles/360016220478" target="_blank">site d’aide en ligne</a>.
+    </p>
+</div>
+<footer>
+    <p>&copy; 2025 <a href="https://www.camoo.hosting" target="_blank">CAMOO SARL</a></p>
+    <p><a href="https://www.camoo.hosting/wordpress-hosting" target="_blank">Hébergement Premium</a> - 2025</p>
+</footer>
+<script defer>
+    const domain = window.location.hostname;
+    document.getElementById('domainName').innerText = domain;
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             $success = "Annonce publiée avec succès !";
             // Redirection vers la page des actualités après la publication
-            header("Location: news.php");
+            header("Location:news.php");
             exit();
         } else {
             $error = "Erreur lors de la publication.";

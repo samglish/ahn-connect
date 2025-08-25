@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once 'db.php';
 require_once 'header.php';
-session_start();
+
 
 if (!isset($_SESSION['id'])) {
     $_SESSION['error'] = "Connectez-vous pour accéder à cette page..";
@@ -68,7 +69,7 @@ $user = $result->fetch_assoc();
 ?>
 
 <h2>Modifier mon profil</h2>
-
+<div id="formulaire">
 <form method="post" enctype="multipart/form-data">
     <label>Nom :</label><br>
     <input type="text" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" required><br><br>
@@ -89,6 +90,7 @@ $user = $result->fetch_assoc();
     <input type="file" name="photo_profil" accept="image/*"><br><br>
 
     <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</div>
 </form>
 
 <?php require_once 'footer.php'; ?>

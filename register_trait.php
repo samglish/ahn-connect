@@ -1,6 +1,6 @@
 <?php
 // Connexion à la base de données
-$conn = new mysqli("localhost", "root", "", "gestion_etudiants");
+$conn = new mysqli("localhost", "ahnens9421_sam", "Samglish12", "ahnens9421_enspm");
 
 // Vérifier la connexion
 if ($conn->connect_error) {
