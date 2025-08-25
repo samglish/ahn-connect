@@ -139,6 +139,7 @@
         <a href="news.php"><i class="fas fa-user-friends"></i>Amis/Actus</a>
         <a href="resultats.php"><i class="fas fa-bell"></i>Résultats</a>
         <a href="chat.php"><i class="fas fa-comments"></i>Discussions</a>
+        <a href="jeux2.php"><i class="fas fa-gamepad"></i>Jeux Vidéo</a>
     </nav>
 
     <!-- Actions utilisateur -->
