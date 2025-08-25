@@ -56,6 +56,7 @@ $result = $conn->query($sql);
     .message {
         display: flex;
         max-width: 100%;
+        position: relative;
     }
 
     .message.other {
@@ -80,6 +81,7 @@ $result = $conn->query($sql);
         max-width: 100%;
         word-wrap: break-word;
         font-size: 0.95em;
+        position: relative;
     }
 
     .me .message-bubble {
@@ -97,6 +99,15 @@ $result = $conn->query($sql);
         color: gray;
         text-align: right;
         margin-top: 5px;
+    }
+
+    .delete-btn {
+        background: none;
+        border: none;
+        color: red;
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: 8px;
     }
 
     /* 📱 Optimisation mobile */
@@ -137,20 +148,24 @@ $result = $conn->query($sql);
     <div id="chat-box" class="chat-box">
         <?php while ($row = $result->fetch_assoc()): ?>
             <?php $is_me = ($row['user_id'] == $user_id); ?>
-            <div class="message <?= $is_me ? 'me' : 'other' ?>">
+            <div class="message <?= $is_me ? 'me' : 'other' ?>" id="msg-<?= $row['id'] ?>">
                 <div class="message-content">
                     <?php if (!$is_me): ?>
-                         <a href="uploads/<?= htmlspecialchars($row['photo']) ?>"><img src="uploads/<?= htmlspecialchars($row['photo']) ?>" alt="Photo"></a>
+                        <img src="uploads/<?= htmlspecialchars($row['photo']) ?>" alt="Photo">
                     <?php endif; ?>
 
                     <div class="message-bubble">
                         <strong><?= htmlspecialchars($row['prenom'] . ' ' . $row['nom']) ?></strong><br>
                         <?= htmlspecialchars($row['message']) ?>
                         <div class="timestamp"><?= date('d/m/Y H:i', strtotime($row['created_at'])) ?></div>
+
+                        <?php if ($is_me): ?>
+                            <button class="delete-btn" onclick="deleteMessage(<?= $row['id'] ?>)"><font size="2px">supprimer🗑️</font></button>
+                        <?php endif; ?>
                     </div>
 
                     <?php if ($is_me): ?>
-                         <a href="uploads/<?= $profile_pic ?>"><img src="uploads/<?= $profile_pic ?>" alt="Profile"></a>
+                        <img src="uploads/<?= $profile_pic ?>" alt="Profile">
                     <?php endif; ?>
                 </div>
             </div>
@@ -171,4 +186,23 @@ $result = $conn->query($sql);
 <script>
     const chatBox = document.getElementById('chat-box');
     chatBox.scrollTop = chatBox.scrollHeight;
+
+    function deleteMessage(id) {
+        if (!confirm("Voulez-vous vraiment supprimer ce message ?")) return;
+
+        fetch("delete_message.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "id=" + id
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("msg-" + id).remove();
+            } else {
+                alert(data.message || "Erreur lors de la suppression");
+            }
+        })
+        .catch(err => alert("Erreur réseau"));
+    }
 </script>
