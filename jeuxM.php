@@ -56,14 +56,29 @@ if (!isset($_SESSION['id'])) {
  <div class="menu-container">
     
     <div class="menu-block" onclick="location.href='jeux1.php'">
-      <h2>📘 Quiz (Questions de cours)</h2>
-      <p>Teste tes connaissances avec des questions issues du cours.</p>
-    </div>
-    
-    <div class="menu-block" onclick="location.href='jeux2.php'">
-      <h2>🎮 Jeu de blocs</h2>
-      <p>Amuse-toi avec un mini jeu de blocs qui tombent façon Tetris simplifié.</p>
+      <h2>Questions de cours</h2>
+      <p>Testez vos connaissances avec des questions issues des cours.</p></br>
+     <i class="fas fa-user"></i> Abdoulatif Wirngo
+
     </div>
 
+ <div class="menu-block" onclick="location.href='jeux3.php'">
+  <h2>Géo Cameroun</h2>
+  <p>Testez vos connaissances sur les 10 régions, les 58 départements et les 360 arrondissements et autres.</p></br>
+  <i class="fas fa-user"></i> steve terence NLAM
+</div>
+
+ <div class="menu-block" onclick="location.href='jeux4.php'">
+  <h2>Pays et Capitales</h2>
+  <p>Testez vos connaissances géographiques à travers le monde ! Sélectionnez un continent et commencez à jouer.</p></br>
+  <i class="fas fa-user"></i> steve terence NLAM
+</div>
+
+ <div class="menu-block" onclick="location.href='jeux2.php'">
+      <h2>Jeu de blocs</h2>
+      <p>Amusez-vous avec un mini jeu de blocs qui tombent façon Tetris simplifié.</p></br>
+     <i class="fas fa-user"></i> Abdoulatif Wirngo
+    </div>
+    
   </div>
   </center>
