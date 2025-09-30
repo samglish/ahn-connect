@@ -1,0 +1,7 @@
+CREATE TABLE bibliotheque (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    fichier VARCHAR(255) NOT NULL,
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    admin_id INT NOT NULL
+);
