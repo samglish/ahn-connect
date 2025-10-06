@@ -150,6 +150,52 @@ if (isset($_POST['remove_friend'])) {
     echo "<script>setTimeout(() => window.location.reload(), 1500)</script>";
 }
 
+// ===================================================
+// ÉTAPE 4 : AFFICHER TOUS LES UTILISATEURS DISPONIBLES
+// ===================================================
+
+$sql_all = "
+    SELECT e.id, e.nom, e.prenom, e.matricule, e.photo_profil
+    FROM etudiants e
+    WHERE e.id != ?
+    AND e.id NOT IN (
+        SELECT ami_id FROM amis WHERE user_id = ? 
+        UNION 
+        SELECT user_id FROM amis WHERE ami_id = ?
+    )
+";
+
+$stmt_all = $conn->prepare($sql_all);
+$stmt_all->bind_param("iii", $user_id, $user_id, $user_id);
+$stmt_all->execute();
+$others = $stmt_all->get_result();
+
+echo "<h3 class='mt-4'>Autres utilisateurs</h3>";
+if ($others->num_rows == 0) {
+    echo "<div class='alert alert-info'>Aucun utilisateur disponible.</div>";
+} else {
+    echo "<div class='friends-list'>";
+    while ($row = $others->fetch_assoc()) {
+        $photo = !empty($row['photo_profil']) ? $row['photo_profil'] : 'default.jpg';
+        echo "
+        <div class='friend-card'>
+            <a href='profileNA.php?id={$row['id']}'>
+                <img src='uploads/{$photo}' alt='Photo profil' class='friend-photo'>
+            </a>
+            <div class='friend-info'>
+                <h5><a href='profileNA.php?id={$row['id']}'>{$row['prenom']} {$row['nom']}</a></h5>
+                <p class='text-muted'>Matricule: {$row['matricule']}</p>
+            </div>
+            <div class='friend-actions'>
+                <form method='POST'>
+                    <input type='hidden' name='matricule' value='{$row['matricule']}'>
+                    <button type='submit' name='add_friend' class='btn btn-sm btn-primary'>Envoyer la demande</button>
+                </form>
+            </div>
+        </div>";
+    }
+    echo "</div>";
+}
 
 
 

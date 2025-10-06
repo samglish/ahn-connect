@@ -75,37 +75,9 @@ $full_name = htmlspecialchars($user['prenom'] . ' ' . $user['nom']);
     <div class="profile-content">
         <h2>Publications</h2>
 
-        <?php if (count($posts) > 0): ?>
-            <?php foreach ($posts as $post): ?>
-                <div class="profile-post">
-                    <div class="post-date"><?= date('d/m/Y H:i', strtotime($post['created_at'])) ?></div>
-                    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+           <p class="no-posts">Vous ne pouvez pas voir ses publications car vous n'êtes pas encore amis. Envoyez-lui une demande pour accéder à son contenu.</p>
 
-                    <?php if (!empty($post['files'])): ?>
-                        <div class="post-files">
-                            <?php foreach ($post['files'] as $file): ?>
-                                <?php
-                                    $ext = strtolower(pathinfo($file['file_path'], PATHINFO_EXTENSION));
-                                    $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
-                                ?>
-                                <?php if (in_array($ext, $image_exts)): ?>
-    <img src="uploads/<?= htmlspecialchars($file['file_path']) ?>" 
-         alt="Image du post" class="post-image">
-<?php else: ?>
-    <a href="uploads/<?= htmlspecialchars($file['file_path']) ?>" 
-       class="file-download" download>
-        <i class="fas fa-file-download"></i> <?= htmlspecialchars($file['file_name']) ?>
-    </a>
-<?php endif; ?>
-
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="no-posts">Aucune publication pour le moment.</p>
-        <?php endif; ?>
+      
     </div>
 </div>
 <style>

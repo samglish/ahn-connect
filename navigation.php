@@ -139,8 +139,8 @@
         <a href="news.php"><i class="fas fa-user-friends"></i>Amis/Actus</a>
         <a href="resultats.php"><i class="fas fa-bell"></i>Résultats</a>
         <a href="chat.php"><i class="fas fa-comments"></i>Discussions</a>
-        <a href="bibliotheque.php"><i class="fas fa-book"></i> Bibliothèque</a>
-         <a href="jeuxM.php"><i class="fas fa-gamepad"></i>Jeux/quizz</a>
+        <a href="library.php"><i class="fas fa-book"></i> Bibliothèque</a>
+        <a href="apropos.php"><i class="fas fa-info-circle"></i> À propos</a>
     </nav>
 
     <!-- Actions utilisateur -->

@@ -9,9 +9,9 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// Fetch data for the page
+// Récupération des données
 $news = get_news($conn);
-$posts = get_posts($conn);
+$posts = get_posts($conn); // doit retourner ['files'] pour chaque post
 
 $user_id = $_SESSION['id'] ?? null;
 $username = ($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? '');
@@ -20,44 +20,50 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
 ?>
 
 <?php if (isset($_SESSION['id'])): ?>
-    <div class="main-content">
-        <!-- Left Sidebar -->
-        <div class="sidebar">
-            <h3 class="sidebar-title">Mon Profil</h3>
-            <div class="user-card">
-                <img src="uploads/<?= $profile_pic ?>" alt="Profile">
-                <div class="user-info">
-                    <div class="username"><?= $username ?></div>
-                    <div class="level"><?= $level ?></div>
-                </div>
-            </div>
-            <h3 class="sidebar-title">Navigation</h3>
-            <div class="menu">
-                <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>
-                <a href="amis.php" class="menu-item"><i class="fas fa-user-friends"></i> Mes Amis</a>
-                <a href="chat.php" class="menu-item"><i class="fas fa-comments"></i> Discussions</a>
+<div class="main-content">
 
-                
+    <!-- Sidebar gauche -->
+    <div class="sidebar">
+        <h3 class="sidebar-title">Mon Profil</h3>
+        <div class="user-card">
+            <img src="uploads/<?= $profile_pic ?>" alt="Profile">
+            <div class="user-info">
+                <div class="username"><?= $username ?></div>
+                <div class="level"><?= $level ?></div>
             </div>
         </div>
+        <h3 class="sidebar-title">Navigation</h3>
+        <div class="menu">
+        <center>
+        <div style="color: black;">
+    <a href="profile.php" class="menu-item"><i class="fas fa-user"></i> Mon Profil</a>&nbsp;&nbsp;&nbsp;
+    <a href="amis.php" class="menu-item"><i class="fas fa-user-friends"></i> Amis</a>&nbsp;&nbsp;&nbsp;
+    <a href="chat.php" class="menu-item"><i class="fas fa-comments"></i> Discussion</a><br>
+    <a href="apropos.php" class="menu-item"><i class="fas fa-building"></i> Visiter le département</a>
+</div>
 
-        <!-- News Feed -->
-        <div class="news-feed">
-            <!-- Create Post Form -->
-            <form class="post-form" method="POST" action="create_post.php" enctype="multipart/form-data">
-                <textarea name="content" placeholder="Quoi de neuf, <?= $username ?> ?" required></textarea>
-                <div class="file-upload">
-                    <label for="post_file"><i class="fas fa-paperclip"></i> Joindre un fichier</label>
-                    <input type="file" name="post_file" id="post_file" style="display: none;">
-                    <span class="file-name" id="file_name">Aucun fichier sélectionné</span>
-                </div>
-                <button type="submit" name="create_post" class="btn btn-primary">Publier</button>
-            </form>
+        </center>
+        </div>
+    </div>
 
-            <!-- User Posts -->
-            <h3 class="section-title">Publications récentes</h3>
-            <?php foreach ($posts as $post): ?>
-                <div class="post-card">
+    <!-- Fil d’actualité -->
+    <div class="news-feed">
+        <!-- Formulaire de création -->
+        <form class="post-form" method="POST" action="create_post.php" enctype="multipart/form-data">
+            <textarea name="content" placeholder="Quoi de neuf, <?= $username ?> ?" required></textarea>
+            <div class="file-upload">
+                <label for="post_files"><i class="fas fa-paperclip"></i> Joindre des fichiers</label>
+                <input type="file" name="post_files[]" id="post_files" multiple style="display: none;">
+                <span class="file-name" id="file_name">Aucun fichier sélectionné</span>
+            </div>
+            <button type="submit" name="create_post" class="btn btn-primary">Publier</button>
+        </form>
+
+        <!-- Publications -->
+        <h3 class="section-title">Publications récentes</h3>
+        <?php foreach ($posts as $post): ?>
+        
+           <div class="post-card">
                     <div class="post-header">
                         <a href="uploads/<?= $post['photo_profil'] ?>"><img src="uploads/<?= $post['photo_profil'] ?>" alt="Profile"></a>
                         <div class="post-user">
@@ -66,40 +72,39 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
                         </div>
                     </div>
 
-                    <div class="post-content">
-                        <p><?= $post['content'] ?></p>
-                        <?php if ($post['file_path']): ?>
-                            <div class="post-file">
-                                <?php 
-                                    $ext = pathinfo($post['file_path'], PATHINFO_EXTENSION);
-                                    $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
-                                ?>
-                                <?php if (in_array(strtolower($ext), $image_exts)): ?>
-                                   <a href="uploads/<?= $post['file_path'] ?>"><img src="uploads/<?= $post['file_path'] ?>" alt="Post Image"></a>
-                                <?php else: ?>
-                                    <a href="uploads/<?= $post['file_path'] ?>" class="file-download">
-                                        <i class="fas fa-file-download"></i> Télécharger <?= strtoupper($ext) ?> (<?= $post['file_path'] ?>)
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <style>
-                    .like-button.liked {
-                            color: blue;
-                    }
+            <div class="post-content">
+                <p><strong><?= $post['content'] ?></strong></p>
 
-                    </style>
+                <!-- Affichage fichiers multiples -->
+                <?php if (!empty($post['files'])): ?>
+                    <?php foreach ($post['files'] as $file): ?>
+                        <div class="post-file">
+                            <?php 
+                                $ext = pathinfo($file['file_path'], PATHINFO_EXTENSION);
+                                $image_exts = ['jpg', 'jpeg', 'png', 'gif'];
+                            ?>
+                            <?php if (in_array(strtolower($ext), $image_exts)): ?>
+                                <a href="uploads/<?= $file['file_path'] ?>" target="_blank">
+                                    <img src="uploads/<?= $file['file_path'] ?>" alt="Post Image">
+                                </a>
+                            <?php else: ?>
+                                <a href="uploads/<?= $file['file_path'] ?>" class="file-download" target="_blank">
+                                    <i class="fas fa-file-download"></i> Télécharger <?= strtoupper($ext) ?> (<?= $file['file_name'] ?>)
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
 
-
-<div class="post-actions">
-    <div class="post-action like-button" data-post-id="<?= $post['id'] ?>">
-        <i class="<?= $post['user_has_liked'] ? 'fas' : 'far' ?> fa-thumbs-up"></i> 
-       (<span class="like-count"><?= $post['like_count'] ?></span>)
-    </div>
-    <div class="post-action">
-        <i class="far fa-comment"></i> Comment
-    </div>
+            <!-- Actions -->
+            <div class="post-actions">
+                <div class="post-action like-button" data-post-id="<?= $post['id'] ?>">
+                    <i class="<?= $post['user_has_liked'] ? 'fas' : 'far' ?> fa-thumbs-up"></i>
+                    (<span class="like-count"><?= $post['like_count'] ?></span>)
+                </div>
+                <div class="post-action"><i class="far fa-comment"></i> Comment</div>
+                
 <?php
   $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
   $share_url = $scheme . "://" . $_SERVER['HTTP_HOST'] . "/post.php?id=" . $post['id'];
@@ -109,33 +114,34 @@ $level = $_SESSION['filiere'] ?? 'Étudiant';
      data-post-url="<?= htmlspecialchars($share_url, ENT_QUOTES) ?>">
   <i class="far fa-share-square"></i> Share
 </div>
+            </div>
 
-
-
-</div>
-                    <div class="post-comments">
-                        <h4 class="comments-title">Commentaires (<?= $post['comment_count'] ?>)</h4>
-
-                        <?php foreach ($post['comments'] as $comment): ?>
-                            <div class="comment">
-                               <a href="uploads/<?= $comment['photo_profil'] ?>"> <img src="uploads/<?= $comment['photo_profil'] ?>" alt="Profile"></a>
-                                <div class="comment-content">
-                                    <div class="username"><?= $comment['username'] ?></div>
-                                    <div class="text"><?= $comment['content'] ?></div>
-                                    <div class="comment-time"><?= date('d/m/Y H:i', strtotime($comment['created_at'])) ?></div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-
-                        <form class="comment-form" method="POST" action="create_comment.php">
-                            <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                            <input type="text" name="comment_content" placeholder="Ajouter un commentaire..." required>
-                            <button type="submit" name="create_comment" class="btn btn-primary">Envoyer</button>
-                        </form>
+            <!-- Commentaires -->
+            <div class="post-comments">
+                <h4 class="comments-title">Commentaires (<?= $post['comment_count'] ?>)</h4>
+                <?php foreach ($post['comments'] as $comment): ?>
+                    <div class="comment">
+                        <img src="uploads/<?= $comment['photo_profil'] ?>" alt="Profile">
+                        <div class="comment-content">
+                            <div class="username"><?= $comment['username'] ?></div>
+                            <div class="text"><?= $comment['content'] ?></div>
+                            <div class="comment-time"><?= date('d/m/Y H:i', strtotime($comment['created_at'])) ?></div>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+
+                <form class="comment-form" method="POST" action="create_comment.php">
+                    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                    <input type="text" name="comment_content" placeholder="Ajouter un commentaire..." required>
+                    <button type="submit" name="create_comment" class="send-btn btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
         </div>
+        <?php endforeach; ?>
+    </div>
+
 
         <!-- Right Sidebar -->
         <div class="right-sidebar">
@@ -277,5 +283,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
 <?php require_once 'footer.php'; ?>
+

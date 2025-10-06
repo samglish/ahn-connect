@@ -6,9 +6,9 @@ function upload_file($file) {
     $target_dir = "uploads/";
     $file_type = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
     
-    $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'zip'];
+    $allowed_types = ['doc','csv','docx','xls','xlsx','ppt','pptx','txt','pdf','jpg','jpeg','png','gif','webp'];
     if (!in_array($file_type, $allowed_types)) {
-        return ['success' => false, 'error' => 'Type de fichier non autorisé. Formats acceptés: jpg, png, gif, pdf, txt, zip'];
+        return ['success' => false, 'error' => 'Type de fichier non autorisé. Formats acceptés: doc,docx,xls,xlsx,ppt,pptx,txt,pdf,jpg,jpeg,png,gif,webp,csv'];
     }
     
     if ($file["size"] > 50000000) {
@@ -27,42 +27,69 @@ function upload_file($file) {
 
 // Récupérer les posts avec les commentaires
 function get_posts($conn) {
-    $current_user_id = $_SESSION['id'];
-    $posts_sql = "SELECT posts.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil, 
-                 (SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id) AS comment_count,
-                 (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id) AS like_count,
-                 (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id AND likes.user_id = $current_user_id) AS user_has_liked
-                 FROM posts
-                 JOIN etudiants ON posts.user_id = etudiants.id
-                 ORDER BY posts.created_at DESC";
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-    $posts_result = mysqli_query($conn, $posts_sql);
+   $sql = "
+    SELECT p.id, p.content, p.created_at, e.id as user_id, 
+           e.prenom, e.nom, e.photo_profil,
+           CONCAT(e.prenom, ' ', e.nom) as username
+    FROM posts p
+    JOIN etudiants e ON p.user_id = e.id
+    ORDER BY p.created_at DESC
+";
+
+    $result = $conn->query($sql);
     $posts = [];
 
-    if ($posts_result) {
-        while ($row = mysqli_fetch_assoc($posts_result)) {
-            $post_id = $row['id'];
+    while ($row = $result->fetch_assoc()) {
+        $post_id = $row['id'];
 
-            // Récupérer les commentaires du post
-            $comments_sql = "SELECT comments.*, etudiants.nom, etudiants.prenom, etudiants.photo_profil 
-                             FROM comments 
-                             JOIN etudiants ON comments.user_id = etudiants.id 
-                             WHERE post_id = $post_id 
-                             ORDER BY comments.created_at ASC";
-            $comments_result = mysqli_query($conn, $comments_sql);
-            $comments = [];
-            if ($comments_result) {
-                while ($comment_row = mysqli_fetch_assoc($comments_result)) {
-                    $comment_row['username'] = $comment_row['prenom'] . ' ' . $comment_row['nom'];
-                    $comments[] = $comment_row;
-                }
-            }
-
-            $row['comments'] = $comments;
-            $row['username'] = $row['prenom'] . ' ' . $row['nom'];
-            $row['user_has_liked'] = $row['user_has_liked'] > 0 ? true : false;
-            $posts[] = $row;
+        // === FICHIERS ===
+        $files = [];
+        $stmt = $conn->prepare("SELECT file_name, file_path FROM post_files WHERE post_id = ?");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $res_files = $stmt->get_result();
+        while ($f = $res_files->fetch_assoc()) {
+            $files[] = $f;
         }
+        $row['files'] = $files;
+
+        // === LIKES ===
+        $stmt = $conn->prepare("SELECT COUNT(*) as c FROM likes WHERE post_id = ?");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $res_likes = $stmt->get_result()->fetch_assoc();
+        $row['like_count'] = $res_likes['c'];
+
+        $user_id = $_SESSION['id'] ?? 0;
+        $stmt = $conn->prepare("SELECT 1 FROM likes WHERE post_id = ? AND user_id = ?");
+        $stmt->bind_param("ii", $post_id, $user_id);
+        $stmt->execute();
+        $row['user_has_liked'] = $stmt->get_result()->num_rows > 0;
+
+        // === COMMENTAIRES ===
+        $comments = [];
+        $stmt = $conn->prepare("
+            SELECT c.content, c.created_at, e.prenom, e.nom, e.photo_profil,
+                   CONCAT(e.prenom, ' ', e.nom) as username
+            FROM comments c
+            JOIN etudiants e ON c.user_id = e.id
+            WHERE c.post_id = ?
+            ORDER BY c.created_at ASC
+        ");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $res_comments = $stmt->get_result();
+        while ($c = $res_comments->fetch_assoc()) {
+            $comments[] = $c;
+        }
+        $row['comments'] = $comments;
+        $row['comment_count'] = count($comments);
+
+        $posts[] = $row;
     }
 
     return $posts;
@@ -95,7 +122,6 @@ function get_users($conn) {
     }
     return $users;
 }
-
 // Fonction de nettoyage des données
 function sanitize_input($data) {
     $data = trim($data);

@@ -64,10 +64,11 @@ if (!isset($_SESSION['id'])) {
         background-color: orange;
     }
 </style>
-<center>
-<h3>Questions de cours</h3>
-</center>
+
 <div id="game">
+<center>
+<h2>Questions de cours</h2>
+</center>
     <div id="score">Score: 0</div>
     <div id="question"></div>
     <div id="options"></div>

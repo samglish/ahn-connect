@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 require_once "db.php"; // ta connexion mysqli
 require_once 'header.php';
 require_once 'functions.php';
@@ -11,6 +12,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
 
 if (isset($_POST['submit'])) {
     $titre = $_POST['titre'];
+     $classe = $_POST['classe'];
     $file = $_FILES['fichier'];
 
     // Vérifier extension
@@ -24,12 +26,12 @@ if (isset($_POST['submit'])) {
     $destination = "uploads/" . $filename;
 
     if (move_uploaded_file($file['tmp_name'], $destination)) {
-        $sql = "INSERT INTO bibliotheque (titre, fichier, admin_id) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO bibliotheque (titre,classe, fichier, admin_id) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $titre, $filename, $_SESSION['id']);
+        $stmt->bind_param("sssi", $titre,$classe, $filename, $_SESSION['id']);
         $stmt->execute();
         $stmt->close();
-        header("Location: bibliotheque.php");
+        header("Location: library.php");
         echo "Sujet ajouté avec succès !";
         
         exit();
@@ -37,6 +39,7 @@ if (isset($_POST['submit'])) {
         echo "Erreur lors de l’upload.";
     }
 }
+ob_end_flush();
 ?>
  <div class="sidebar">
      <div id="formulaire">
@@ -44,6 +47,7 @@ if (isset($_POST['submit'])) {
 <form method="post" enctype="multipart/form-data">
    
     <input type="text" name="titre" placeholder="Titre du sujet" required><br>
+      <input type="text" name="classe" placeholder="ex classe : IHN1" required><br>
     <input type="file" name="fichier" placeholder="Fichier" required><br>
     <input type="submit" name="submit" value="Envoyer">
 </form>
